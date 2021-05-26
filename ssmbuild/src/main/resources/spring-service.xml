@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+        <!--整合service层 -->
+<!--  1.扫描service下的包-->
+<context:component-scan base-package="service"/>
+<!--2. 将我们的业务类，注入到spring中-->
+    <bean id="BookServiceImpl" class="service.BookServiceImpl">
+        <property name="bookMapper" ref="bookMapper"/>
+    </bean>
+<!--    3.声名事务-->
+    <bean id="TransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+<!--        注入数据源-->
+        <property name="dataSource" ref="database"/>
+    </bean>
+<!--    4.aop事务支持-->
+</beans>

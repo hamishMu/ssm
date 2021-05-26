@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.BookMapper">
+    <insert id="addBook">
+        insert into books (bookName,bookCounts,detail)
+        values (#{bookName},#{bookCounts},#{detail});
+    </insert>
+    <update id="updateBook">
+        update books
+        set bookName =#{bookName},bookCounts =#{bookCounts},detail=#{detail}
+        where  bookId =#{bookId} ;
+    </update>
+    <delete id="deleteBookById" parameterType="int">
+        delete  from books where bookId = #{id}
+    </delete>
+    <select id="queryBookById" resultType="pojo.Books" >
+        select *
+        from books where bookId = #{id};
+    </select>
+    <select id="queryAllBooks" resultType="pojo.Books">
+        select * from books;
+    </select>
+    <select id="queryBookByName" resultType="pojo.Books">
+        select *
+        from books where bookName like CONCAT('%', #{bookName}, '%');
+    </select>
+</mapper>
